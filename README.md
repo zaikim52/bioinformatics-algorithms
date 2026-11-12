@@ -16,5 +16,5 @@ utils.py Shared functions
 
 ## Usage
 ```bash
-python ch01/ba1a_pattern_count.py data/rosalind_ba1a.txt
+python -m ch01.ba1a data/rosalind_ba1a.txt > output.txt
 ```
