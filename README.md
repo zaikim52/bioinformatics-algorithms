@@ -10,7 +10,7 @@ Python solutions to the code challenges in *Bioinformatics Algorithms: An Active
 ```
 ch01/ Chapter 1 solutions
 ch02/ Chapter 2 solutions
-data/  Sample datasets
+data/ Sample datasets
 utils.py Shared functions
 ```
 
@@ -18,8 +18,3 @@ utils.py Shared functions
 ```bash
 python ch01/ba1a_pattern_count.py data/rosalind_ba1a.txt
 ```
-
-## Progress
-| ID | Problem | Solution | Key idea |
-|----|---------|----------|----------|
-| BA1A | Pattern Count | [code](ch01/ba1a_pattern_count.py) | Sliding window, O(nk) |
