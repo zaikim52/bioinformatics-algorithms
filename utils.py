@@ -37,3 +37,10 @@ def neighbors(pattern: str, d: int) -> set[str]:
         else:
             result.add(pattern[0] + suffix)
     return result
+
+
+def pattern_to_number(pattern: str) -> int:
+    num = 0
+    for base in pattern:
+        num = num * 4 + "ACGT".index(base)
+    return num
