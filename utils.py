@@ -44,3 +44,11 @@ def pattern_to_number(pattern: str) -> int:
     for base in pattern:
         num = num * 4 + "ACGT".index(base)
     return num
+
+
+def number_to_pattern(index: int, k: int) -> str:
+    pattern = []
+    for _ in range(k):
+        index, r = divmod(index, 4)
+        pattern.append("ACGT"[r])
+    return ''.join(reversed(pattern))
