@@ -36,6 +36,7 @@ def neighbors(pattern: str, d: int) -> set[str]:
             result.update(base + suffix for base in NUCLEOTIDES)
         else:
             result.add(pattern[0] + suffix)
+    
     return result
 
 
@@ -43,6 +44,7 @@ def pattern_to_number(pattern: str) -> int:
     num = 0
     for base in pattern:
         num = num * 4 + "ACGT".index(base)
+    
     return num
 
 
@@ -51,4 +53,5 @@ def number_to_pattern(index: int, k: int) -> str:
     for _ in range(k):
         index, r = divmod(index, 4)
         pattern.append("ACGT"[r])
+    
     return ''.join(reversed(pattern))

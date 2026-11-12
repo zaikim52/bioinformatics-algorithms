@@ -10,6 +10,7 @@ def motif_enumeration(dnas, k, d):
         for neighbor in neighbors(kmer, d):
             if all(any(hamming_distance(neighbor, dna[j:j + k]) <= d for j in range(len(dna) - k + 1)) for dna in dnas):
                 patterns.add(neighbor)
+    
     return sorted(patterns)
 
 
