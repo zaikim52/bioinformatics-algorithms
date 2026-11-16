@@ -71,6 +71,20 @@ def create_profile(motifs: list[str]) -> dict[str, list[float]]:
     return profile
 
 
+def create_profile_pseudocounts(motifs: list[str]) -> dict[str, list[float]]:
+    k = len(motifs[0])
+    profile = {nucleotide: [1] * k for nucleotide in NUCLEOTIDES}
+    for motif in motifs:
+        for j, nucleotide in enumerate(motif):
+            profile[nucleotide][j] += 1
+    
+    t = len(motifs)
+    for nucleotide in NUCLEOTIDES:
+        profile[nucleotide] = [count / (t + 4) for count in profile[nucleotide]]
+    
+    return profile
+
+
 def profile_most_probable_kmer(text: str, k: int, profile: dict[str, list[float]]) -> str:
     max_prob = -1
     most_probable_kmer = None
