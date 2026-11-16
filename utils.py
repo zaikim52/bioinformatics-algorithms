@@ -55,3 +55,45 @@ def number_to_pattern(index: int, k: int) -> str:
         pattern.append("ACGT"[r])
     
     return ''.join(reversed(pattern))
+
+
+def create_profile(motifs: list[str]) -> dict[str, list[float]]:
+    k = len(motifs[0])
+    profile = {nucleotide: [0] * k for nucleotide in NUCLEOTIDES}
+    for motif in motifs:
+        for j, nucleotide in enumerate(motif):
+            profile[nucleotide][j] += 1
+    
+    t = len(motifs)
+    for nucleotide in NUCLEOTIDES:
+        profile[nucleotide] = [count / t for count in profile[nucleotide]]
+    
+    return profile
+
+
+def profile_most_probable_kmer(text: str, k: int, profile: dict[str, list[float]]) -> str:
+    max_prob = -1
+    most_probable_kmer = None
+    for kmer in kmers(text, k):
+        prob = 1
+        for j, nucleotide in enumerate(kmer):
+            prob *= profile[nucleotide][j]
+        
+        if prob > max_prob:
+            max_prob = prob
+            most_probable_kmer = kmer
+    
+    return most_probable_kmer
+
+
+def score(motifs: list[str]) -> int:
+    k = len(motifs[0])
+    score = 0
+    for j in range(k):
+        counts = {nucleotide: 0 for nucleotide in NUCLEOTIDES}
+        for motif in motifs:
+            counts[motif[j]] += 1
+        max_count = max(counts.values())
+        score += len(motifs) - max_count
+    
+    return score
