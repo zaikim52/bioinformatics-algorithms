@@ -1,4 +1,5 @@
 import sys
+import random
 
 NUCLEOTIDES = "ACGT"
 _COMPLEMENT = str.maketrans("ACGT", "TGCA")
@@ -98,6 +99,21 @@ def profile_most_probable_kmer(text: str, k: int, profile: dict[str, list[float]
             most_probable_kmer = kmer
     
     return most_probable_kmer
+
+
+def profile_randomly_generated_kmer(text: str, k: int, profile: dict[str, list[float]]) -> str:
+    kmers_list = kmers(text, k)
+    probabilities = []
+    for kmer in kmers_list:
+        prob = 1
+        for j, nucleotide in enumerate(kmer):
+            prob *= profile[nucleotide][j]
+        probabilities.append(prob)
+    
+    #total_prob = sum(probabilities)
+    #probabilities = [prob / total_prob for prob in probabilities]
+    
+    return random.choices(kmers_list, weights=probabilities, k=1)[0]
 
 
 def score(motifs: list[str]) -> int:
